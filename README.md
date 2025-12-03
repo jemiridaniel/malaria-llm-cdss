@@ -156,13 +156,12 @@ pip install -r requirements.txt
 brew install ollama # macOS
 
 For Linux/Windows: https://ollama.ai/download
+
 5. Download Llama 3.1 model
 ollama pull llama3.1:8b
 
 6. Start Ollama server (in separate terminal)
 ollama serve
-
-text
 
 ### Quick Start
 
