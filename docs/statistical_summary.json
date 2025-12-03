@@ -1,0 +1,13 @@
+{
+  "baseline": {
+    "total_cases": 1682,
+    "accuracy": 30.618311533888225,
+    "precision": 82.01294697903822,
+    "recall": 54.69642495836641,
+    "f1_score": 44.101388092778095,
+    "per_stage": {
+      "No_Malaria": {
+        "precision": 28.051787916152897,
+        "recall": 100.0,
+        "f1": 43.813192103996144,
+        "support": 
