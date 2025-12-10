@@ -218,15 +218,35 @@ providing both accurate classification and natural language explanations, this a
 addresses key limitations of traditional expert systems while maintaining computational 
 efficiency suitable for low-resource settings.
 
-ACKNOWLEDGMENTS
+---
 
-This work evolved from an undergraduate project at Federal University of Technology Akure, 
-Nigeria. We acknowledge the open-source community for Ollama and Llama 3.1, and Kaggle for 
-the malaria diagnosis dataset.
+## Data Availability Statement
 
-REFERENCES
+The dataset used in this study is publicly available:
+- Synthetic dataset: Available at https://github.com/jemiridaniel/malaria-llm-cdss/data
+- Real-world data: Kaggle Malaria Diagnosis Dataset (https://kaggle.com/datasets/programmer3/malaria-diagnosis-dataset)
+- Source code: https://github.com/jemiridaniel/malaria-llm-cdss
+- Evaluation results: Included in supplementary materials
 
-[To be added based on journal requirements]
+All code, data processing scripts, and evaluation notebooks are openly available under the MIT License to facilitate reproducibility and future research.
+
+## Ethics Statement
+
+This computational study utilized publicly available datasets and synthetic data. No human subjects were directly involved in data collection. The study does not require Institutional Review Board (IRB) approval as it constitutes a retrospective analysis of de-identified datasets. 
+
+The system is designed and presented as clinical decision support, not autonomous diagnosis. Implementation includes appropriate safety warnings and human-in-the-loop requirements for clinical deployment. Future prospective clinical validation studies will require appropriate ethical approvals.
+
+## Acknowledgments
+
+We acknowledge the open-source community for Ollama and Meta AI for Llama 3.1. We thank the contributors to the Kaggle Malaria Diagnosis Dataset. The original undergraduate system was developed at Federal University of Technology Owerri (FUTO), Nigeria.
+
+## Conflicts of Interest
+
+None declared. This research was conducted independently without external funding or commercial interests.
+
+## References
+
+[Your 30 references will go here]
 
 {'='*70}
 END OF DRAFT
