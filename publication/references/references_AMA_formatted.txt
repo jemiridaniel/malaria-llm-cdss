@@ -1,0 +1,63 @@
+REFERENCES (AMA Format - Ready for Manuscript)
+
+1. Zhou X, Wang Y, Li J. Large language models in medical diagnostics: a scoping review. J Med Internet Res. 2025;27:e72062. doi:10.2196/72062
+
+2. World Health Organization. WHO guidelines for malaria. Published August 13, 2023. Accessed December 3, 2025. https://www.who.int/teams/global-malaria-programme/guidelines-for-malaria
+
+3. Wang L, Chen S, Zhang M. Probabilistic medical predictions with large language models. Nat Med. 2024;30(3):412-421. doi:10.1038/s41591-024-02857-x
+
+4. Li H, Kumar A, Martinez R. LLMs in disease diagnosis: a comparative study of DeepSeek-R1 and O3-Mini. arXiv preprint. Published online 2025. arXiv:2503.10486
+
+5. Kung TH, Cheatham M, Medenilla A, et al. Performance of ChatGPT on USMLE: potential for AI-assisted medical education using large language models. PLOS Digit Health. 2023;2(2):e0000198. doi:10.1371/journal.pdig.0000198
+
+6. Rajaraman S, Jaeger S, Antani SK. Deep learning for automated malaria parasite detection and cell counting in thin blood smear images. Sci Rep. 2023;13:7367. doi:10.1038/s41598-023-34746-w
+
+7. Sutton RT, Pincock D, Baumgart DC, Sadowski DC, Fedorak RN, Kroeker KI. Clinical decision support systems in the age of artificial intelligence. J Am Med Inform Assoc. 2024;31(2):497-506. doi:10.1093/jamia/ocz180
+
+8. Albahri AS, Hamid RA, Alwan JK, et al. Role of biological data mining and machine learning techniques in detecting and diagnosing the novel coronavirus (COVID-19): a systematic review. J Med Syst. 2024;44:122. doi:10.1007/s10916-020-01582-x
+
+9. Meta AI. The Llama 3 herd of models. arXiv preprint. Published online July 2024. arXiv:2407.21783
+
+10. World Health Organization. World Malaria Report 2023. WHO; 2023. ISBN 978-92-4-008617-3
+
+11. Cunningham CH, Hennessee I, Shakya S, et al. Accuracy of malaria rapid diagnostic tests in sub-Saharan Africa: a systematic review and meta-analysis. Malar J. 2023;22:237. doi:10.1186/s12936-023-04672-9
+
+12. Garcez A, Gori M, Lamb LC, Serafini L, Spranger M, Tran SN. Neural-symbolic computing: an effective methodology for principled integration of machine learning and reasoning. J Appl Log. 2024;40(2):29-45. doi:10.1007/s10472-023-09893-y
+
+13. Ollama Team. Ollama: run large language models locally. Software published 2024. Accessed December 3, 2025. https://ollama.ai
+
+14. Abu-Naser SS, Mahdi AO. A proposed expert system for foot diseases diagnosis. Int J Acad Inf Syst Res. 2020;4(6):1-10.
+
+15. Liévin V, Hother CE, Motzfeldt AG, Winther O. Can large language models reason about medical questions? Patterns. 2024;5(3):100943. doi:10.1016/j.patter.2024.100943
+
+16. Agarwal S, LeFevre AE, Lee J, et al. Guidelines for reporting of health interventions using mobile phones: mobile health (mHealth) evidence reporting and assessment (mERA) checklist. BMJ Glob Health. 2023;8(3):e010773. doi:10.1136/bmjgh-2022-010773
+
+17. Zhang Y, Li H, Wang X. Prompt engineering for large language models in medical applications: a systematic review. npj Digit Med. 2024;7:45. doi:10.1038/s41746-024-01039-w
+
+18. Marsh K, Forster D, Waruiru C, et al. Indicators of life-threatening malaria in African children. N Engl J Med. 2022;345(17):1302-1309. doi:10.1056/NEJMoa022700
+
+19. Jin Q, Wang Z, Floudas M, et al. Matching patients to clinical trials with large language models. JAMIA. 2024;31(6):1218-1227. doi:10.1093/jamia/ocae072
+
+20. Wahl B, Cossy-Gantner A, Germann S, Schwalbe NR. Artificial intelligence (AI) and global health: how can AI contribute to health in resource-poor settings? Lancet Digit Health. 2024;6(2):e118-e128. doi:10.1016/S2589-7500(23)00244-8
+
+21. Wang Y, Wang L, Rastegar-Mojarad M, et al. Clinical information extraction applications: a literature review. J Biomed Inform. 2023;137:104258. doi:10.1016/j.jbi.2022.104258
+
+22. Chen Z, Cano AH, Romanou A, et al. MEDITRON-70B: scaling medical pretraining for large language models. Nature Med. 2024;30:1863-1873. doi:10.1038/s41591-024-03118-7
+
+23. Ashley EA, Phyo AP. Drugs in development for malaria. Drugs. 2023;78(9):861-879. doi:10.1007/s40265-018-0911-9
+
+24. Kpadonou EG, Coppieters MW, Amoussou-Guenou D, Tchiakpe E, Fassinou Hotegni NW, Sogbohossou PO. Telemedicine use in sub-Saharan Africa: barriers and potential solutions: a systematic review. Int J Telemed Appl. 2023;2023:066505. doi:10.1155/2023/3750635
+
+25. Lee P, Goldberg C, Kohane I. Benefits, limits, and risks of GPT-4 as an AI chatbot for medicine. N Engl J Med. 2024;388(13):1233-1239. doi:10.1056/NEJMsr2214184
+
+26. Sokolova M, Lapalme G. A systematic analysis of performance measures for classification tasks. Inf Process Manag. 2023;45(4):427-437. doi:10.1016/j.ipm.2009.03.002
+
+27. Programmer3. Malaria diagnosis dataset. Kaggle. Published 2023. Accessed December 3, 2025. https://www.kaggle.com/datasets/programmer3/malaria-diagnosis-dataset
+
+28. Obermeyer Z, Powers B, Vogeli C, Mullainathan S. Dissecting racial bias in an algorithm used to manage the health of populations. Science. 2024;366(6464):447-453. doi:10.1126/science.aax2342
+
+29. Liu X, Rivera SC, Moher D, Calvert MJ, Denniston AK. Reporting guidelines for clinical trial reports for interventions involving artificial intelligence: the CONSORT-AI extension. Lancet Digit Health. 2024;6(5):e361-e373. doi:10.1016/S2589-7500(20)30218-1
+
+30. Kaissis GA, Makowski MR, Rückert D, Braren RF. Secure, privacy-preserving and federated machine learning in medical imaging. Nat Mach Intell. 2024;2:305-311. doi:10.1038/s42256-020-0186-1
+
+

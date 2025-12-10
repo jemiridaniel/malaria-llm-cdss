@@ -332,7 +332,7 @@ A manuscript based on this work is in preparation for submission.
 
 ## 🏆 Acknowledgments
 
-- **Original System**: Federal University of Technology Akure (FUTA), Nigeria, 2020
+- **Original System**: Federal University of Technology Owerri (FUTO), Nigeria, 2020
 - **Dataset**: Kaggle Malaria Diagnosis Dataset contributors
 - **LLM**: Meta AI (Llama 3.1) & Ollama team
 - **Guidance**: Dr. [Supervisor Name], The University of Texas at Dallas
@@ -364,7 +364,7 @@ PhD Student, Artificial Intelligence & Information Science
 The University of Texas at Dallas
 
 - 🐙 GitHub: [@jemiridaniel](https://github.com/jemiridaniel)
-- 📧 Email: [Your Email](updatedan2@outlook.com)
+- 📧 Email: [Your Email](Daniel.Jemiri@UTDallas.edu)
 - 🔗 LinkedIn: [Your LinkedIn](https://www.linkedin.com/in/jemiridanieltaiwo/)
 
 **For collaboration, questions, or clinical deployment inquiries, please open an issue or contact directly.**
