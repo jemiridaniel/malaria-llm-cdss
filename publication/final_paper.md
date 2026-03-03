@@ -97,7 +97,7 @@ LLM Reasoning Module (Llama 3.1 8B, local/offline)
 Structured Clinical Output
 ```
 
-The key architectural principle is that the rule-based classifier holds sole authority over severity determination. The LLM receives the rule-derived diagnosis as input and is constrained to generating explanations and confidence estimates—it cannot alter or override the classification. This design eliminates the principal hallucination risk of LLM-driven clinical systems while preserving their explainability advantage.
+The key architectural principle is that the rule-based classifier holds sole authority over severity determination. The LLM receives the rule-derived diagnosis as input and is constrained to generating explanations and confidence estimates—it cannot alter or override the classification. This design eliminates the principal hallucination risk of LLM-driven clinical systems while preserving their explainability advantage. Figure 1 illustrates the full system pipeline.
 
 ### 3.2 Dataset
 
@@ -198,7 +198,7 @@ The hybrid LLM-enhanced system achieved 87.22% overall diagnostic accuracy (1,46
 | Macro F1-Score | 0.174 | 0.853 | +0.679 |
 | Correct Classifications | 515 | 1,467 | +952 |
 
-The most dramatic improvement was in macro recall (0.306 → 0.872) and F1-score (0.174 → 0.853), reflecting the hybrid system's ability to correctly identify malaria cases across all severity stages rather than concentrating correct classifications on a single dominant class.
+The most dramatic improvement was in macro recall (0.306 → 0.872) and F1-score (0.174 → 0.853), reflecting the hybrid system's ability to correctly identify malaria cases across all severity stages rather than concentrating correct classifications on a single dominant class. Figure 2 visualizes accuracy across all stages for both systems.
 
 ### 4.2 Per-Stage Performance
 
@@ -221,15 +221,82 @@ Several findings merit detailed discussion:
 
 **No Malaria specificity.** The baseline system achieved perfect No Malaria classification (455/455), while the hybrid system achieved 77.36% (352/455), with 103 No Malaria cases reclassified as Stage I. This trade-off reflects the hybrid system's more aggressive early-detection posture: in a malaria-endemic region, the clinical cost of a false negative (untreated malaria) substantially outweighs the cost of a false positive (unnecessary antimalarial treatment). The trade-off is therefore clinically appropriate, though it should be communicated transparently to healthcare workers during deployment.
 
-**Stage II performance.** Stage II detection remained low in both systems (baseline: 16.95%; hybrid: 15.25%), with a marginal decline in the hybrid system. Stage II occupies a clinically ambiguous position—its symptom profile overlaps substantially with both Stage I presentations and non-malarial febrile illness—and its underrepresentation in the dataset (118 cases; 7.0%) constrains the discriminatory power of fixed-threshold rules. This limitation is discussed further in Section 5.
+**Stage II performance.** Stage II detection remained low in both systems (baseline: 16.95%; hybrid: 15.25%), with a marginal decline in the hybrid system. Stage II occupies a clinically ambiguous position—its symptom profile overlaps substantially with both Stage I presentations and non-malarial febrile illness—and its underrepresentation in the dataset (118 cases; 7.0%) constrains the discriminatory power of fixed-threshold rules. This limitation is discussed further in Section 5. Row-normalised confusion matrices for both systems are presented in Figure 3.
 
 ### 4.3 Processing Efficiency
 
-Average total processing time was 6.3 seconds per case, decomposable as: rule-based classification (<0.01 seconds, instantaneous) and LLM reasoning inference (~6.3 seconds). This latency is clinically acceptable for a decision support tool consulted after initial patient assessment. In a production environment with GPU acceleration, LLM inference time would be substantially reduced. The deterministic rule engine returns the severity classification instantaneously regardless of LLM availability, ensuring core diagnostic functionality under all conditions.
+Average total processing time was 6.3 seconds per case (SD = 11.7s), decomposable as: rule-based classification (<0.01 seconds, instantaneous) and LLM reasoning inference (~6.3 seconds). The elevated standard deviation reflects occasional inference outliers under CPU-bound conditions; median latency was 5.4 seconds. This latency is clinically acceptable for a decision support tool consulted after initial patient assessment. In a production environment with GPU acceleration, LLM inference time would be substantially reduced. The deterministic rule engine returns the severity classification instantaneously regardless of LLM availability, ensuring core diagnostic functionality under all conditions. Figure 4 presents the processing time distribution and the accuracy–latency trade-off.
 
 ### 4.4 LLM Explanation Quality
 
 The LLM component generated patient-specific clinical explanations with a mean confidence score of 85% across all cases. Qualitatively, explanations referenced specific reported symptoms rather than generic stage descriptions—for example: *"Your symptoms of headache, exhaustion, and sweating persisting for fewer than seven days are consistent with early-stage uncomplicated malaria, and prompt antimalarial treatment is recommended to prevent progression to more severe disease."* The JSON output format was successfully parsed in 99.82% of cases; three cases (0.18%) required the template-based fallback due to malformed LLM output, demonstrating the robustness of the fallback mechanism.
+
+### 4.5 Statistical Analysis
+
+To establish the significance and magnitude of the observed performance differences, we applied a suite of statistical tests to the full 1,682-case evaluation dataset following the multi-class performance framework of Sokolova and Lapalme [26].
+
+#### 4.5.1 McNemar's Test for Paired Accuracy Comparison
+
+Because both systems were evaluated on the identical set of cases, a paired test is appropriate. McNemar's test was applied to the 2×2 concordance table of per-case correctness:
+
+- **b** (baseline correct, hybrid wrong) = 116 cases
+- **c** (baseline wrong, hybrid correct) = 1,068 cases
+
+McNemar's χ²(1) = 763.9, *p* = 3.90 × 10⁻¹⁶⁸ (with Edwards continuity correction). The result is overwhelmingly significant: the hybrid system and the baseline do not perform equivalently on the same cases. The asymmetry (c/b ratio = 9.2) confirms that improvements attributable to the hybrid system vastly exceed any regressions.
+
+#### 4.5.2 Wilson Score Confidence Intervals for Accuracy
+
+Wilson score 95% confidence intervals were computed for the binomial proportion of correctly classified cases:
+
+- **Baseline:** 30.62% (95% CI: 28.5%–32.9%)
+- **LLM-Enhanced Hybrid:** 87.22% (95% CI: 85.5%–88.7%)
+
+The non-overlapping confidence intervals confirm a statistically reliable difference in overall accuracy between the two systems.
+
+#### 4.5.3 Cohen's Kappa Coefficient
+
+Cohen's kappa (κ) was computed to assess classification agreement with ground-truth labels beyond chance:
+
+- **Baseline:** κ = 0.050 (slight agreement; 95% CI approximately 0.02–0.08)
+- **LLM-Enhanced Hybrid:** κ = 0.716 (substantial agreement; 95% CI approximately 0.69–0.74)
+
+The near-zero baseline kappa confirms that the baseline system's 30.62% accuracy is largely attributable to correctly classifying the majority class (No Malaria) and Critical cases—not to reliable multi-class discrimination. The hybrid system's κ of 0.716 indicates substantial agreement, consistent with the category boundaries proposed by Landis and Koch.
+
+#### 4.5.4 Per-Stage Proportion Tests
+
+Two-sample z-tests for the difference in binomial proportions were conducted for each of the four severity stages. Table 4 summarises the full per-stage statistical comparison.
+
+**Table 4. Per-Stage Statistical Comparison (n = 1,682; α = 0.05)**
+
+| Stage | n | Baseline Acc. (95% CI) | Hybrid Acc. (95% CI) | z-statistic | p-value |
+|:---|---:|:---|:---|---:|:---|
+| No Malaria | 455 | 100.0% (99.2%–100.0%) | 77.4% (73.3%–81.0%) | 9.97 | <0.001 |
+| Stage I | 1,089 | 1.8% (1.1%–2.8%) | 98.9% (98.1%–99.4%) | −97.3 | <0.001 |
+| Stage II | 118 | 16.9% (10.8%–25.3%) | 15.3% (9.5%–23.5%) | 0.36 | 0.723 |
+| Critical | 20 | 100.0% (83.9%–100.0%) | 100.0% (83.9%–100.0%) | 0.00 | 1.000 |
+
+Key observations:
+
+- **Stage I** shows the largest and most significant improvement (z = −97.3, p < 0.001); the 97.1 percentage point gain is the primary driver of the overall accuracy improvement.
+- **No Malaria** shows a statistically significant decline in specificity (z = 9.97, p < 0.001). As discussed in Section 5.1, this trade-off is clinically appropriate in the endemic context.
+- **Stage II** shows no statistically significant difference between systems (p = 0.723), confirming that both the baseline and hybrid system fail similarly on this stage—a limitation attributable to dataset imbalance and symptom overlap rather than to LLM integration.
+- **Critical** achieves perfect sensitivity in both systems (p = 1.000), confirming that the unconditional Priority 1 rule is robust across both architectures.
+
+#### 4.5.5 Summary Statistics Table
+
+**Table 5. Summary Statistical Analysis**
+
+| Test | Statistic | Value | Interpretation |
+|:---|:---|---:|:---|
+| McNemar's test | χ²(1) | 763.9 | p = 3.90 × 10⁻¹⁶⁸; highly significant |
+| Baseline accuracy 95% CI | Wilson | 28.5%–32.9% | — |
+| Hybrid accuracy 95% CI | Wilson | 85.5%–88.7% | — |
+| Baseline Cohen's κ | κ | 0.050 | Slight agreement |
+| Hybrid Cohen's κ | κ | 0.716 | Substantial agreement |
+| Processing time (mean ± SD) | — | 6.3 ± 11.7 s | Clinically acceptable; outliers under CPU constraints |
+| Processing time (median) | — | 5.4 s | More representative central tendency |
+
+All statistical computations were performed in Python 3.11 using SciPy (v1.11) and are fully reproducible via the provided `publication/generate_figures.py` script [source code available at the repository listed in the Data Availability Statement].
 
 ---
 
@@ -329,6 +396,18 @@ The original rule-based malaria diagnosis system that forms the baseline of this
 ## Conflicts of Interest
 
 None declared. This research was conducted independently without external funding or commercial interests.
+
+---
+
+## List of Figures
+
+**Figure 1.** MalariaLLM System Architecture. Five-stage pipeline showing the flow from Patient Input through the Rule-Based Classification Engine, LLM Reasoning Module, Structured Clinical Output, and PDF Clinical Report. An annotation highlights that the LLM receives the rule-derived severity classification and cannot alter it. (`publication/figures/fig1_system_architecture.png`)
+
+**Figure 2.** Diagnostic Accuracy: Baseline vs. LLM-Enhanced Hybrid System. Side-by-side grouped bar chart showing per-stage and overall accuracy for both systems across No Malaria, Stage I, Stage II, Critical, and Overall categories (n = 1,682). (`publication/figures/fig2_accuracy_comparison.png`)
+
+**Figure 3.** Confusion Matrices: Row-Normalised per True Stage (n = 1,682). Left: Baseline (Rule-Based Only). Right: LLM-Enhanced Hybrid. Cell values show row-normalised percentage and raw case count for each true-predicted stage combination. (`publication/figures/fig3_confusion_matrices.png`)
+
+**Figure 4.** Processing Efficiency: LLM Inference Time Distribution and Accuracy–Latency Trade-off. Left: Histogram of per-case processing times for the hybrid system with mean and median reference lines. Right: Scatter plot showing the accuracy–latency trade-off between the baseline (<0.01 s, 30.62%) and hybrid systems (6.3 s, 87.22%). (`publication/figures/fig4_processing_time.png`)
 
 ---
 

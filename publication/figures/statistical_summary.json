@@ -1,0 +1,106 @@
+{
+  "n_total": 1682,
+  "baseline": {
+    "correct": 515,
+    "accuracy_pct": 30.6183,
+    "ci_95_pct": [
+      28.46,
+      32.86
+    ],
+    "cohens_kappa": 0.0502
+  },
+  "hybrid": {
+    "correct": 1467,
+    "accuracy_pct": 87.2176,
+    "ci_95_pct": [
+      85.54,
+      88.73
+    ],
+    "cohens_kappa": 0.7159
+  },
+  "mcnemar": {
+    "b_base_correct_hyb_wrong": 116,
+    "c_base_wrong_hyb_correct": 1068,
+    "chi2_statistic": 763.85,
+    "p_value": 3.9036587175043524e-168,
+    "interpretation": "p < 0.001 \u2014 highly significant difference"
+  },
+  "per_stage": {
+    "No_Malaria": {
+      "n": 455,
+      "baseline_correct": 455,
+      "hybrid_correct": 352,
+      "baseline_acc": 100.0,
+      "hybrid_acc": 77.36,
+      "baseline_ci_95": [
+        99.2,
+        100.0
+      ],
+      "hybrid_ci_95": [
+        73.3,
+        81.0
+      ],
+      "z_statistic": 10.777,
+      "p_value": 0.0
+    },
+    "Stage_I": {
+      "n": 1089,
+      "baseline_correct": 20,
+      "hybrid_correct": 1077,
+      "baseline_acc": 1.84,
+      "hybrid_acc": 98.9,
+      "baseline_ci_95": [
+        1.2,
+        2.8
+      ],
+      "hybrid_ci_95": [
+        98.1,
+        99.4
+      ],
+      "z_statistic": -45.299,
+      "p_value": 0.0
+    },
+    "Stage_II": {
+      "n": 118,
+      "baseline_correct": 20,
+      "hybrid_correct": 18,
+      "baseline_acc": 16.95,
+      "hybrid_acc": 15.25,
+      "baseline_ci_95": [
+        11.2,
+        24.7
+      ],
+      "hybrid_ci_95": [
+        9.9,
+        22.8
+      ],
+      "z_statistic": 0.354,
+      "p_value": 0.723181
+    },
+    "Critical": {
+      "n": 20,
+      "baseline_correct": 20,
+      "hybrid_correct": 20,
+      "baseline_acc": 100.0,
+      "hybrid_acc": 100.0,
+      "baseline_ci_95": [
+        83.9,
+        100
+      ],
+      "hybrid_ci_95": [
+        83.9,
+        100
+      ],
+      "z_statistic": 0.0,
+      "p_value": 1.0
+    }
+  },
+  "processing_time": {
+    "mean_s": 6.28,
+    "median_s": 5.36,
+    "std_s": 11.71,
+    "min_s": 3.81,
+    "max_s": 307.09,
+    "n_cases": 1682
+  }
+}
