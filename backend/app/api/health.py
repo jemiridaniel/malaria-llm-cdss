@@ -1,8 +1,13 @@
 from fastapi import APIRouter
+from app.core.config import settings
 
-router = APIRouter(tags=["health"])
-
+router = APIRouter()
 
 @router.get("/health")
-async def health_check():
-    return {"status": "ok", "service": "malaria-cdss"}
+def health_check():
+    return {
+        "status": "ok",
+        "groq_key_loaded": bool(settings.groq_api_key),
+        "groq_key_preview": settings.groq_api_key[:8] + "..." if settings.groq_api_key else "EMPTY",
+        "groq_model": settings.groq_model
+    }
