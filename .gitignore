@@ -215,3 +215,4 @@ __pycache__/
 node_modules/
 frontend/build/
 data/processed/*.csv
+results/figures/
