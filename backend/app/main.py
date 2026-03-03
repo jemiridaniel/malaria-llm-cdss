@@ -1,17 +1,11 @@
-import os
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from pathlib import Path
+from app.api import diagnosis, health  # health must be imported
 
-from app.api import diagnosis, health
-
-app = FastAPI(
-    title="Malaria CDSS API",
-    description="AI-powered malaria clinical decision support system",
-    version="1.0.0",
-)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,28 +15,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(health.router, prefix="/api/v1")
-app.include_router(diagnosis.router, prefix="/api/v1")
+# API routes FIRST — before any static file handling
+app.include_router(health.router, tags=["Health"])
+app.include_router(diagnosis.router, prefix="/api", tags=["Diagnosis"])
 
-# Serve React SPA in production (Docker / HF Spaces)
-BUILD_DIR = "/app/frontend/build"
-
-if os.path.exists(BUILD_DIR):
-    app.mount("/static", StaticFiles(directory=f"{BUILD_DIR}/static"), name="static")
+# Static file serving LAST
+react_build = Path("/app/frontend/build")
+if react_build.exists():
+    app.mount("/static", StaticFiles(directory=str(react_build / "static")), name="static")
 
     @app.get("/")
-    async def serve_root():
-        return FileResponse(f"{BUILD_DIR}/index.html")
+    def serve_root():
+        return FileResponse(str(react_build / "index.html"))
 
     @app.get("/{full_path:path}")
-    async def serve_spa(full_path: str):
-        file_path = f"{BUILD_DIR}/{full_path}"
-        if os.path.isfile(file_path):
-            return FileResponse(file_path)
-        return FileResponse(f"{BUILD_DIR}/index.html")
-
+    def serve_spa(full_path: str):
+        # Let API routes through
+        if full_path.startswith("api/") or full_path == "health":
+            return {"error": "not found"}
+        file_path = react_build / full_path
+        if file_path.exists():
+            return FileResponse(str(file_path))
+        return FileResponse(str(react_build / "index.html"))
 else:
-
     @app.get("/")
-    async def root():
-        return {"message": "Malaria CDSS API", "docs": "/docs"}
+    def root():
+        return {"message": "MalariaLLM API running", "docs": "/docs"}
