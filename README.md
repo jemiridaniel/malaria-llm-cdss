@@ -2,13 +2,12 @@
 title: MalariaLLM
 emoji: 🦟
 colorFrom: red
-colorTo: orange
+colorTo: pink
 sdk: docker
 pinned: false
 license: apache-2.0
-short_description: Explainable AI clinical decision support for malaria diagnosis
+short_description: Explainable AI for malaria diagnosis
 ---
-
 <div align="center">
 
 # MalariaLLM
