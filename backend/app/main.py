@@ -17,7 +17,7 @@ app.add_middleware(
 
 # API routes FIRST — before any static file handling
 app.include_router(health.router, tags=["Health"])
-app.include_router(diagnosis.router, prefix="/api", tags=["Diagnosis"])
+app.include_router(diagnosis.router, prefix="/api/v1", tags=["Diagnosis"])
 
 # Static file serving LAST
 react_build = Path("/app/frontend/build")
