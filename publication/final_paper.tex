@@ -115,7 +115,7 @@ Email: \href{mailto:danieljemiri@gmail.com}{danieljemiri@gmail.com}
 
 \textbf{Objective:} We aimed to develop and evaluate a hybrid clinical decision support system (CDSS) for malaria diagnosis that integrates deterministic rule-based classification with large language model (LLM) reasoning to improve both diagnostic accuracy and clinical explainability in resource-limited settings.
 
-\textbf{Methods:} We developed a three-component hybrid system comprising: (1) a structured 19-symptom assessment module with patient demographic capture; (2) a deterministic rule-based classification engine implementing WHO malaria severity guidelines across four severity tiers; and (3) an LLM reasoning module using Llama 3.1 8B deployed locally via Ollama for natural language explanation generation. The system was evaluated on 1,682 malaria cases (1,622 real-world cases from the Kaggle Malaria Diagnosis Dataset and 60 synthetic cases) spanning four severity levels: No Malaria, Stage I (uncomplicated), Stage II (moderate), and Critical. Performance was benchmarked against the original rule-based baseline system using overall accuracy, macro-averaged precision, recall, and F1-score.
+\textbf{Methods:} We developed a three-component hybrid system comprising: (1) a structured 19-symptom assessment module with patient demographic capture; (2) a deterministic rule-based classification engine implementing WHO malaria severity guidelines across four severity tiers; and (3) an LLM reasoning module using Llama 3.1 8B deployed locally via Ollama for natural language explanation generation. The system was evaluated on 1,682 malaria cases (1,622 cases from the publicly available Kaggle Malaria Diagnosis Dataset and 60 synthetic cases) spanning four severity levels: No Malaria, Stage I (uncomplicated), Stage II (moderate), and Critical. Performance was benchmarked against the original rule-based baseline system using overall accuracy, macro-averaged precision, recall, and F1-score.
 
 \textbf{Results:} The hybrid LLM-enhanced system achieved 87.22\% overall diagnostic accuracy (1,467/1,682 cases correctly classified) compared to 30.62\% for the baseline rule-based system, representing a 56.60 percentage point improvement (relative improvement: 185\%; $p<0.001$). Stage I malaria detection improved from 1.84\% to 98.90\%, and 100\% sensitivity for critical malaria identification was maintained in both systems. The macro F1-score improved from 0.174 to 0.853. Average processing time was 6.3 seconds per case, and the LLM generated patient-specific explanations with a mean confidence score of 85\%. The system operates entirely offline with no recurring API costs.
 
@@ -215,7 +215,7 @@ The key architectural principle is that the rule-based classifier holds sole aut
 
 The evaluation dataset comprised 1,682 malaria cases assembled from two sources:
 
-\textbf{Real-world data ($n = 1{,}622$):} The Kaggle Malaria Diagnosis Dataset \cite{ref27} contains symptom-level records from confirmed malaria patients. Each record includes age, sex, and binary (yes/no) indicators for clinical features including fever, headache, cough, abdominal pain, body malaise, dizziness, vomiting, confusion, backache, chest pain, and joint pain. Severity labels were derived from symptom counts and malaria-positivity status following WHO severity guidelines \cite{ref2}.
+\textbf{Publicly available data ($n = 1{,}622$):} The Kaggle Malaria Diagnosis Dataset \cite{ref27} contains symptom-level records from confirmed malaria patients. Each record includes age, sex, and binary (yes/no) indicators for clinical features including fever, headache, cough, abdominal pain, body malaise, dizziness, vomiting, confusion, backache, chest pain, and joint pain. Severity labels were derived from symptom counts and malaria-positivity status following WHO severity guidelines \cite{ref2}.
 
 \textbf{Synthetic data ($n = 60$):} To ensure representation of the underrepresented Stage II (moderate) and Critical severity categories, we generated 60 synthetic cases programmatically following WHO-defined clinical criteria \cite{ref2,ref18}. Synthetic cases were constructed entirely from published clinical guidelines without reference to individual patient data, raising no privacy or ethical concerns.
 
@@ -472,7 +472,8 @@ Processing time (median)  & ---         & 5.4 s     & More representative centra
 \end{tabular}
 \end{table}
 
-All statistical computations were performed in Python 3.11 using SciPy (v1.11) and are fully reproducible via the provided \texttt{publication/generate\_figures.py} script \cite{ref27}.
+%% CITATION CHECK: \cite{ref27} (Programmer3, Kaggle dataset) is attached here to the generate_figures.py SOURCE CODE, not to a dataset. The script is the repository code listed in the Data Availability Statement and has no numbered reference entry. Original citation left in place pending author confirmation.
+All statistical computations were performed in Python 3.11 using SciPy (v1.11) and are fully reproducible via the provided \texttt{publication/generate\_figures.py} script \cite{ref27}\textcolor{red}{~[CITATION CHECK: \texttt{ref27} is the Kaggle \emph{dataset}, but it is cited here for the \texttt{generate\_figures.py} \emph{source code}, which is the repository listed in the Data Availability Statement (not a numbered reference) --- confirm intended citation]}.
 
 %% ══════════════════════════════════════════════════════════════════════════════
 \section{Discussion}
@@ -557,7 +558,7 @@ All materials necessary for reproducing this study are openly available:
 \begin{itemize}
   \item \textbf{Source code:} \url{https://github.com/jemiridaniel/malaria-llm-cdss} (MIT License)
   \item \textbf{Synthetic dataset:} Included in the repository under \texttt{data/}
-  \item \textbf{Real-world dataset:} Kaggle Malaria Diagnosis Dataset \cite{ref27} --- \url{https://www.kaggle.com/datasets/programmer3/malaria-diagnosis-dataset}
+  \item \textbf{Publicly available dataset:} Kaggle Malaria Diagnosis Dataset \cite{ref27} --- \url{https://www.kaggle.com/datasets/programmer3/malaria-diagnosis-dataset}
   \item \textbf{Evaluation results and confusion matrices:} Included as supplementary materials
 \end{itemize}
 

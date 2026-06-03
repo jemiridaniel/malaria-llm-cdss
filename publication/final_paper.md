@@ -21,7 +21,7 @@ Email: danieljemiri@gmail.com
 
 **Objective:** We aimed to develop and evaluate a hybrid clinical decision support system (CDSS) for malaria diagnosis that integrates deterministic rule-based classification with large language model (LLM) reasoning to improve both diagnostic accuracy and clinical explainability in resource-limited settings.
 
-**Methods:** We developed a three-component hybrid system comprising: (1) a structured 19-symptom assessment module with patient demographic capture; (2) a deterministic rule-based classification engine implementing WHO malaria severity guidelines across four severity tiers; and (3) an LLM reasoning module using Llama 3.1 8B deployed locally via Ollama for natural language explanation generation. The system was evaluated on 1,682 malaria cases (1,622 real-world cases from the Kaggle Malaria Diagnosis Dataset and 60 synthetic cases) spanning four severity levels: No Malaria, Stage I (uncomplicated), Stage II (moderate), and Critical. Performance was benchmarked against the original rule-based baseline system using overall accuracy, macro-averaged precision, recall, and F1-score.
+**Methods:** We developed a three-component hybrid system comprising: (1) a structured 19-symptom assessment module with patient demographic capture; (2) a deterministic rule-based classification engine implementing WHO malaria severity guidelines across four severity tiers; and (3) an LLM reasoning module using Llama 3.1 8B deployed locally via Ollama for natural language explanation generation. The system was evaluated on 1,682 malaria cases (1,622 cases from the publicly available Kaggle Malaria Diagnosis Dataset and 60 synthetic cases) spanning four severity levels: No Malaria, Stage I (uncomplicated), Stage II (moderate), and Critical. Performance was benchmarked against the original rule-based baseline system using overall accuracy, macro-averaged precision, recall, and F1-score.
 
 **Results:** The hybrid LLM-enhanced system achieved 87.22% overall diagnostic accuracy (1,467/1,682 cases correctly classified) compared to 30.62% for the baseline rule-based system, representing a 56.60 percentage point improvement (relative improvement: 185%; p<0.001). Stage I malaria detection improved from 1.84% to 98.90%, and 100% sensitivity for critical malaria identification was maintained in both systems. The macro F1-score improved from 0.174 to 0.853. Average processing time was 6.3 seconds per case, and the LLM generated patient-specific explanations with a mean confidence score of 85%. The system operates entirely offline with no recurring API costs.
 
@@ -103,7 +103,7 @@ The key architectural principle is that the rule-based classifier holds sole aut
 
 The evaluation dataset comprised 1,682 malaria cases assembled from two sources:
 
-**Real-world data (n = 1,622):** The Kaggle Malaria Diagnosis Dataset [27] contains symptom-level records from confirmed malaria patients. Each record includes age, sex, and binary (yes/no) indicators for clinical features including fever, headache, cough, abdominal pain, body malaise, dizziness, vomiting, confusion, backache, chest pain, and joint pain. Severity labels were derived from symptom counts and malaria-positivity status following WHO severity guidelines [2].
+**Publicly available data (n = 1,622):** The Kaggle Malaria Diagnosis Dataset [27] contains symptom-level records from confirmed malaria patients. Each record includes age, sex, and binary (yes/no) indicators for clinical features including fever, headache, cough, abdominal pain, body malaise, dizziness, vomiting, confusion, backache, chest pain, and joint pain. Severity labels were derived from symptom counts and malaria-positivity status following WHO severity guidelines [2].
 
 **Synthetic data (n = 60):** To ensure representation of the underrepresented Stage II (moderate) and Critical severity categories, we generated 60 synthetic cases programmatically following WHO-defined clinical criteria [2,18]. Synthetic cases were constructed entirely from published clinical guidelines without reference to individual patient data, raising no privacy or ethical concerns.
 
@@ -374,7 +374,7 @@ All materials necessary for reproducing this study are openly available:
 
 - **Source code:** https://github.com/jemiridaniel/malaria-llm-cdss (MIT License)
 - **Synthetic dataset:** Included in the repository under `data/`
-- **Real-world dataset:** Kaggle Malaria Diagnosis Dataset [27] — https://www.kaggle.com/datasets/programmer3/malaria-diagnosis-dataset
+- **Publicly available dataset:** Kaggle Malaria Diagnosis Dataset [27] — https://www.kaggle.com/datasets/programmer3/malaria-diagnosis-dataset
 - **Evaluation results and confusion matrices:** Included as supplementary materials
 
 All code, data processing scripts, and evaluation notebooks are made available to facilitate full reproducibility and future research.
