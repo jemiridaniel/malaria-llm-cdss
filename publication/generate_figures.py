@@ -444,14 +444,24 @@ def fig4_processing(df_hyb: pd.DataFrame):
 
     for sx, sy, sc, ss, sn in zip(times, accs, colors, sizes, systems):
         ax2.scatter(sx, sy, c=sc, s=ss, zorder=5, edgecolors="white", lw=1.5)
-        offset_x = -0.35 if sn.startswith("Baseline") else 0.25
-        offset_y = -5 if sn.startswith("Baseline") else 4
-        ax2.annotate(
-            sn, (sx, sy),
-            xytext=(sx + offset_x, sy + offset_y),
-            fontsize=9.5, fontweight="bold", color=sc,
-            ha="center",
-        )
+        if sn.startswith("Baseline"):
+            # Offset the "Baseline (Rule-Based)" label down and to the right of
+            # its marker (which sits at the far-left edge) with a thin connector,
+            # so the red text no longer overlaps the red data point.
+            ax2.annotate(
+                sn, xy=(sx, sy),
+                xytext=(sx + 0.55, sy - 4),
+                fontsize=9.5, fontweight="bold", color=sc,
+                ha="left", va="top",
+                arrowprops=dict(arrowstyle="-", color=sc, lw=0.8, alpha=0.7),
+            )
+        else:
+            ax2.annotate(
+                sn, xy=(sx, sy),
+                xytext=(sx + 0.25, sy + 4),
+                fontsize=9.5, fontweight="bold", color=sc,
+                ha="center",
+            )
 
     # Tradeoff annotation
     ax2.annotate(
