@@ -190,13 +190,13 @@ if __name__ == "__main__":
     combined_path = 'data/processed/malaria_combined_dataset.csv'
     synthetic_path = 'data/processed/malaria_evaluation_dataset.csv'
     
-if os.path.exists(combined_path):
+    if os.path.exists(combined_path):
         print("🎯 Using COMBINED dataset (Kaggle + Synthetic)\n")
         dataset_path = combined_path
-else:
+    else:
         print("⚠️  Using SYNTHETIC dataset only")
         print("   Download Kaggle data for better evaluation!\n")
         dataset_path = synthetic_path
-    
+
     # Evaluate
-results, accuracy = evaluate_baseline(dataset_path)
+    results, accuracy = evaluate_baseline(dataset_path)
